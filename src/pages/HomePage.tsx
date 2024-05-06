@@ -8,6 +8,7 @@ export interface IHomePageProps {
 
 const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
   const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortedUniversities, setSortedUniversities] =
     useState<IUniversity[]>(universities);
   const [sortOrder, setSortOrder] = useState("");
@@ -28,6 +29,17 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
     setSortedUniversities(sorted);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const keyword = e.target.value.toLowerCase();
+    setSearchTerm(keyword);
+    const filtered = universities.filter(
+      (university) =>
+        university.name.toLowerCase().includes(keyword) ||
+        university.country.toLowerCase().includes(keyword)
+    );
+    setSortedUniversities(filtered);
+  };
+
   return (
     <div>
       <h1>List of Universities</h1>
@@ -37,6 +49,15 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
+
+      <label htmlFor="search">Search</label>
+      <input
+        id="search"
+        type="text"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        placeholder="Search by name or country"
+      />
       {error ? (
         <p>{error} </p>
       ) : (
