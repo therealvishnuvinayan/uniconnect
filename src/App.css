@@ -1,3 +1,10 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #f4f6f9;
+}
+
 .homepage-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -128,4 +135,62 @@ h1 {
 #search:focus {
   border-color: #3498db;
   box-shadow: 0 0 4px rgba(52, 152, 219, 0.6);
+}
+
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  background-color: #f4f6f9; 
+  padding: 20px;
+}
+
+.details-content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
+}
+
+.details-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.details-info p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.details-link {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.details-link:hover {
+  color: #2980b9;
+}
+
+.not-found-message {
+  color: red;
+  font-weight: bold;
+}
+
+.details-info p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.details-link {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.details-link:hover {
+  color: #2980b9;
 }
