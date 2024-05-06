@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { IUniversity, getUniversities } from "../models/universtityApis";
 
-const HomePage: React.FC = () => {
-  const [universities, setUniversities] = useState<IUniversity[]>([]);
+export interface IHomePageProps {
+  universities: IUniversity[];
+}
+
+const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
   const [error, setError] = useState<string | null>(null);
-
-  console.log('universities', universities)
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getUniversities();
-        setUniversities(data);
-      } catch (error) {
-        setError("Unable to fetch universities");
-        console.log(error);
-      }
-    }
-    fetchData();
-  }, []);
+  console.log("universities", universities);
 
   return (
     <div>
@@ -39,6 +29,9 @@ const HomePage: React.FC = () => {
               >
                 {university.web_pages[0]}
               </a>
+              <Link to={`/details/${encodeURIComponent(university.name)}`}>
+                View
+              </Link>
             </li>
           ))}
         </ul>
