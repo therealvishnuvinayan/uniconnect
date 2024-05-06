@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IUniversity } from "../models/universtityApis";
-import {
-  deleteUniversity,
-  searchUniversities,
-  sortUniversities,
-} from "../controllers/universitiesController";
+import { searchUniversities, sortUniversities } from "../controllers/universitiesController";
 
 export interface IHomePageProps {
   universities: IUniversity[];
@@ -14,8 +10,7 @@ export interface IHomePageProps {
 
 const HomePage: React.FC<IHomePageProps> = ({ universities, error }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortedUniversities, setSortedUniversities] =
-    useState<IUniversity[]>(universities);
+  const [sortedUniversities, setSortedUniversities] = useState<IUniversity[]>(universities);
   const [sortOrder, setSortOrder] = useState("");
 
   useEffect(() => {
@@ -25,9 +20,7 @@ const HomePage: React.FC<IHomePageProps> = ({ universities, error }) => {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const order = e.target.value;
     setSortOrder(order);
-    setSortedUniversities(
-      sortUniversities(universities, order as "asc" | "desc")
-    );
+    setSortedUniversities(sortUniversities(universities, order as "asc" | "desc"));
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,8 +29,15 @@ const HomePage: React.FC<IHomePageProps> = ({ universities, error }) => {
     setSortedUniversities(searchUniversities(universities, keyword));
   };
 
-  const handleDelete = (name: string) => {
-    setSortedUniversities(deleteUniversity(sortedUniversities, name));
+  const handleDelete = (name: string, index: number) => {
+    const tableRow = document.querySelector(`#university-row-${index}`);
+    if (!tableRow) return;
+
+    tableRow.classList.add("fade-out");
+    setTimeout(() => {
+      const updatedList = sortedUniversities.filter((uni) => uni.name !== name);
+      setSortedUniversities(updatedList);
+    }, 1000);
   };
 
   return (
@@ -63,7 +63,6 @@ const HomePage: React.FC<IHomePageProps> = ({ universities, error }) => {
         </div>
       </header>
 
-      {/* Content Section */}
       <main>
         <h1>List of Universities</h1>
         {error ? (
@@ -80,32 +79,22 @@ const HomePage: React.FC<IHomePageProps> = ({ universities, error }) => {
               </tr>
             </thead>
             <tbody>
-              {sortedUniversities.map((university) => (
-                <tr key={university.name}>
+              {sortedUniversities.map((university, index) => (
+                <tr id={`university-row-${index}`} key={university.name}>
                   <td>{university.name}</td>
                   <td>{university.country}</td>
                   <td>
-                    <a
-                      href={university.web_pages[0]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={university.web_pages[0]} target="_blank" rel="noopener noreferrer">
                       {university.web_pages[0]}
                     </a>
                   </td>
                   <td>
-                    <Link
-                      to={`/details/${encodeURIComponent(university.name)}`}
-                      className="view-button"
-                    >
+                    <Link to={`/details/${encodeURIComponent(university.name)}`} className="view-button">
                       View
                     </Link>
                   </td>
                   <td>
-                    <button
-                      className="delete-button"
-                      onClick={() => handleDelete(university.name)}
-                    >
+                    <button className="delete-button" onClick={() => handleDelete(university.name, index)}>
                       Delete
                     </button>
                   </td>
