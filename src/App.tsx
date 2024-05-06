@@ -7,10 +7,21 @@ import { IUniversity, getUniversities } from "./models/universtityApis";
 
 const App: React.FC = () => {
   const [universities, setUniversities] = useState<IUniversity[]>([]);
+  const [error, setError] = useState<string>('');
   useEffect(() => {
     async function fetchData() {
-      const data = await getUniversities();
-      setUniversities(data);
+      try {
+        const data = await getUniversities();
+        if(data === null || data.length === 0) {
+          setError('Unable to fetch universities. Please try again later')
+        } else {
+          setUniversities(data)
+        }
+      } catch (error) {
+        console.log('##reached else')
+        console.error("unable to fetch data", error);
+        setError("Unable to fetch universities, Please try again later");
+      }
     }
     fetchData();
   }, []);
@@ -18,7 +29,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage universities={universities} />} />
+        <Route path="/" element={<HomePage universities={universities} error={error} />} />
         <Route
           path="/details/:name"
           element={<DetailPage universities={universities} />}

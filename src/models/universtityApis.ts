@@ -12,7 +12,7 @@ export interface IUniversity {
   country: string;
 }
 
-export async function getUniversities(): Promise<IUniversity[]> {
+export async function getUniversities(): Promise<IUniversity[] | null> {
   const cachedUniversityData = localStorage.getItem("universities");
   if (cachedUniversityData) {
     try {
@@ -35,6 +35,6 @@ export async function getUniversities(): Promise<IUniversity[]> {
     console.error("Api request failed", error);
     return cachedUniversityData
       ? (JSON.parse(cachedUniversityData) as IUniversity[])
-      : [];
+      : null;
   }
 }

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IUniversity } from "../models/universtityApis";
-import { deleteUniversity, searchUniversities, sortUniversities } from "../controllers/universitiesController";
+import {
+  deleteUniversity,
+  searchUniversities,
+  sortUniversities,
+} from "../controllers/universitiesController";
 
 export interface IHomePageProps {
   universities: IUniversity[];
+  error?: string;
 }
 
-const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
-  const [error, setError] = useState<string | null>(null);
+const HomePage: React.FC<IHomePageProps> = ({ universities, error }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortedUniversities, setSortedUniversities] =
     useState<IUniversity[]>(universities);
@@ -21,7 +25,9 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const order = e.target.value;
     setSortOrder(order);
-    setSortedUniversities(sortUniversities(universities, order as 'asc' | 'desc'));
+    setSortedUniversities(
+      sortUniversities(universities, order as "asc" | "desc")
+    );
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +38,7 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
 
   const handleDelete = (name: string) => {
     setSortedUniversities(deleteUniversity(sortedUniversities, name));
-  }
+  };
 
   return (
     <div>
@@ -71,7 +77,9 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
               <Link to={`/details/${encodeURIComponent(university.name)}`}>
                 View
               </Link>
-              <button onClick={() => handleDelete(university.name)}>Delete</button>
+              <button onClick={() => handleDelete(university.name)}>
+                Delete
+              </button>
             </li>
           ))}
         </ul>
