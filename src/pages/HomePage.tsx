@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IUniversity } from "../models/universtityApis";
+import { deleteUniversity, searchUniversities, sortUniversities } from "../controllers/universitiesController";
 
 export interface IHomePageProps {
   universities: IUniversity[];
@@ -20,29 +21,17 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const order = e.target.value;
     setSortOrder(order);
-
-    const sorted = [...universities].sort((a, b) =>
-      order === "asc"
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name)
-    );
-    setSortedUniversities(sorted);
+    setSortedUniversities(sortUniversities(universities, order as 'asc' | 'desc'));
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const keyword = e.target.value.toLowerCase();
     setSearchTerm(keyword);
-    const filtered = universities.filter(
-      (university) =>
-        university.name.toLowerCase().includes(keyword) ||
-        university.country.toLowerCase().includes(keyword)
-    );
-    setSortedUniversities(filtered);
+    setSortedUniversities(searchUniversities(universities, keyword));
   };
 
   const handleDelete = (name: string) => {
-    const filtered = sortedUniversities.filter(university => university.name !== name);
-    setSortedUniversities(filtered);
+    setSortedUniversities(deleteUniversity(sortedUniversities, name));
   }
 
   return (
