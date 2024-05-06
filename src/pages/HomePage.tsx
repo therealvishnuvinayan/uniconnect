@@ -40,6 +40,11 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
     setSortedUniversities(filtered);
   };
 
+  const handleDelete = (name: string) => {
+    const filtered = sortedUniversities.filter(university => university.name !== name);
+    setSortedUniversities(filtered);
+  }
+
   return (
     <div>
       <h1>List of Universities</h1>
@@ -77,6 +82,7 @@ const HomePage: React.FC<IHomePageProps> = ({ universities }) => {
               <Link to={`/details/${encodeURIComponent(university.name)}`}>
                 View
               </Link>
+              <button onClick={() => handleDelete(university.name)}>Delete</button>
             </li>
           ))}
         </ul>
