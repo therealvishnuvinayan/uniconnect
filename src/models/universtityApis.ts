@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 const apiUrl =
-  "https://universities.hipolabs.com/search?country=United%20Arab%20Emirates";
+  "http://universities.hipolabs.com/search?country=United%20Arab%20Emirates";
 
 export interface IUniversity {
   "state-province": string;
