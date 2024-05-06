@@ -1,38 +1,131 @@
-.App {
+.homepage-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 150px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.universities-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.universities-table th,
+.universities-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.universities-table th {
+  background-color: #f4f4f4;
+}
+
+.universities-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.universities-table a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.universities-table a:hover {
+  text-decoration: underline;
+}
+
+.view-button,
+.delete-button {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: #fff !important;
+  text-decoration: none !important;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.view-button {
+  background-color: #3498db;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.view-button:hover {
+  background-color: #2980b9;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.delete-button {
+  background-color: #e74c3c;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-button:hover {
+  background-color: #c0392b;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#sortOrder {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+}
+
+#sortOrder:hover {
+  border-color: #a0a0a0;
+  background-color: #f0f0f0;
+}
+
+#sortOrder:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.6);
+}
+
+#search {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 16px;
+  outline: none;
+  margin-left: 10px;
+  width: 250px;
+}
+
+#search:hover {
+  border-color: #a0a0a0;
+  background-color: #f0f0f0;
+}
+
+#search:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.6);
 }
