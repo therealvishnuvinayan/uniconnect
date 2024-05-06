@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IUniversity } from "../models/universtityApis";
 
 interface IDetailPageProps {
@@ -19,6 +19,9 @@ const DetailPage: React.FC<IDetailPageProps> = ({ universities }) => {
 
   return (
     <div className="details-container">
+      <header className="details-header">
+        <Link to="/" className="back-button">Back</Link>
+      </header>
       <div className="details-content">
         <h1 className="details-title">{university.name}</h1>
         <div className="details-info">

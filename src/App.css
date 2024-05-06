@@ -139,12 +139,21 @@ h1 {
 
 .details-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 70vh;
-  background-color: #f4f6f9; 
-  padding: 20px;
+  justify-content: center;
+  background-color: #f4f6f9;
 }
+.details-header {
+  width: 100%;
+  max-width: 670px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 0px;
+  box-sizing: border-box;
+}
+
 
 .details-content {
   background-color: #fff;
@@ -193,4 +202,17 @@ h1 {
 
 .details-link:hover {
   color: #2980b9;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #c0392b;
 }
