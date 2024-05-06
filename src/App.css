@@ -14,6 +14,7 @@ body, html {
 
 .header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
@@ -25,6 +26,7 @@ body, html {
 
 .controls {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 10px;
 }
@@ -68,7 +70,6 @@ h1 {
 .delete-button {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #3498db;
   color: #fff !important;
   text-decoration: none !important;
   border-radius: 5px;
@@ -93,46 +94,26 @@ h1 {
   background-color: #c0392b;
 }
 
-#sortOrder {
+#sortOrder, #search {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #dcdcdc;
   background-color: #f8f8f8;
   color: #333;
   font-size: 16px;
-  cursor: pointer;
   outline: none;
+}
+
+#sortOrder {
   margin-right: 10px;
 }
 
-#sortOrder:hover {
+#sortOrder:hover, #search:hover {
   border-color: #a0a0a0;
   background-color: #f0f0f0;
 }
 
-#sortOrder:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 4px rgba(52, 152, 219, 0.6);
-}
-
-#search {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #dcdcdc;
-  background-color: #f8f8f8;
-  color: #333;
-  font-size: 16px;
-  outline: none;
-  margin-left: 10px;
-  width: 250px;
-}
-
-#search:hover {
-  border-color: #a0a0a0;
-  background-color: #f0f0f0;
-}
-
-#search:focus {
+#sortOrder:focus, #search:focus {
   border-color: #3498db;
   box-shadow: 0 0 4px rgba(52, 152, 219, 0.6);
 }
@@ -144,6 +125,7 @@ h1 {
   justify-content: center;
   background-color: #f4f6f9;
 }
+
 .details-header {
   width: 100%;
   max-width: 670px;
@@ -153,7 +135,6 @@ h1 {
   padding: 20px 0px;
   box-sizing: border-box;
 }
-
 
 .details-content {
   background-color: #fff;
@@ -190,20 +171,6 @@ h1 {
   font-weight: bold;
 }
 
-.details-info p {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.details-link {
-  color: #3498db;
-  text-decoration: none;
-}
-
-.details-link:hover {
-  color: #2980b9;
-}
-
 .back-button {
   padding: 10px 20px;
   background-color: #e74c3c;
@@ -227,3 +194,22 @@ h1 {
   opacity: 0;
   transition: opacity 1s ease;
 }
+
+@media (max-width: 599px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  #sortOrder, #search {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
